@@ -9,7 +9,7 @@ var http = {
     },
     request: function(options) {
         var options = this.options(options);
-        var req = new XMLHttpRequest();
+        var req = window.XMLHttpRequest?new window.XMLHttpRequest:(window.ActiveXObject?new ActiveXObject("MSXML2.XMLHTTP"):null);
         req.onload = options.onload;
         req.open(options.method, options.url, options.async);
         req.setRequestHeader('Content-Type', options.contentType);
