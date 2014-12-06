@@ -4,6 +4,7 @@ var http = {
         url: "./",
         async: true,
         data: null,
+        contentType: "text/plain",
         onload: function() { }
     },
     request: function(options) {
@@ -11,6 +12,7 @@ var http = {
         var req = new XMLHttpRequest();
         req.onload = options.onload;
         req.open(options.method, options.url, options.async);
+        req.setRequestHeader('Content-Type', options.contentType);
         req.send(options.data);
         return req;
     },
@@ -20,6 +22,7 @@ var http = {
             url: options.url || this.DEFAULTS.url,
             async: (typeof options.async === "undefined") ? this.DEFAULTS.async : options.async,
             data: (typeof options.data === "undefined") ? this.DEFAULTS.data : options.data,
+            contentType: options.contentType || this.DEFAULTS.contentType,
             onload: options.onload || this.DEFAULTS.onload
         }
     },
