@@ -13,12 +13,13 @@ Make AJAX/HTTP requests from client-side JavaScript.
 Pass in your options to the `request` function (all are optionall; defaults are shown):
 ```javascript
 var options = {
-    method: "GET",               // The method to use
-    url: "./",                   // The URL to request
-    async: true,                 // Whether to make the request asynchronously
-    data: null,                  // Any data you'd like to send
-    contentType: "text/plain",   // The MIME type of the content you're sending
-    onload: function() { }       // Your onload callback function
+    async: true,
+    contentType: "text/plain",
+    data: null,
+    headers: {},
+    method: "GET",
+    onload: function() {},
+    url: "./",
 }
 ```
 

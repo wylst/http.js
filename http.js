@@ -1,30 +1,38 @@
 var http = {
     DEFAULTS: {
-        method: "GET",
-        url: "./",
         async: true,
-        data: null,
         contentType: "text/plain",
-        onload: function() { }
+        data: null,
+        headers: {},
+        method: "GET",
+        onload: function() {},
+        url: "./",
     },
     request: function(options) {
+        // Get options and initialize request with URL
         var options = this.options(options);
         var req = new XMLHttpRequest();
         req.onload = options.onload;
         req.open(options.method, options.url, options.async);
+
+        // Request headers
+        for (var key in options.headers) {
+            if (options.headers.hasOwnProperty(key))
+                req.setRequestHeader(key, options.headers[key]);
+        }
         req.setRequestHeader('Content-Type', options.contentType);
+
+        // Send request and return
         req.send(options.data);
         return req;
     },
     options: function(options) {
-        return {
-            method: options.method || this.DEFAULTS.method,
-            url: options.url || this.DEFAULTS.url,
-            async: (typeof options.async === "undefined") ? this.DEFAULTS.async : options.async,
-            data: (typeof options.data === "undefined") ? this.DEFAULTS.data : options.data,
-            contentType: options.contentType || this.DEFAULTS.contentType,
-            onload: options.onload || this.DEFAULTS.onload
+        var merged = {}, defaults = this.DEFAULTS;
+        for (var key in defaults) {
+            if (defaults.hasOwnProperty(key))
+                merged[key] = options[key] || defaults[key];
         }
+        return merged;
     },
     get: function(options) {
         return this.request(options);
