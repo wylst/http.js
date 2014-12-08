@@ -18,7 +18,9 @@ var options = {
     data: null,
     headers: {},
     method: "GET",
+    onerror: function() {},
     onload: function() {},
+    onreadystatechange: function() {},
     url: "./",
 }
 ```
