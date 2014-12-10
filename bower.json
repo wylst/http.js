@@ -1,0 +1,10 @@
+{
+    "name": "http.js",
+    "version": "0.1.0",
+    "main": "http.min.js",
+    "keywords": ["http", "AJAX", "XMLHttpRequest", "client-side"],
+    "license": "MIT",
+    "ignore": [
+        "html"
+    ]
+}
