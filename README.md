@@ -10,7 +10,7 @@ Make AJAX/HTTP requests from client-side JavaScript.
 
 `http.js` currently all HTTP methods. GET and POST requests are supported in short-hand form.
 
-Pass in your options to the `request` function (all are optionall; defaults are shown):
+Pass in your options to the `request` function (all are optional; defaults are shown):
 ```javascript
 var options = {
     async: true,
