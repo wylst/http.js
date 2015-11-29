@@ -1,20 +1,32 @@
 var http = {
     DEFAULTS: {
         async: true,
-        contentType: "text/plain",
+        contentType: 'text/plain',
         data: null,
         headers: {},
-        method: "GET",
+        method: 'GET',
         onerror: function() {},
         onload: function() {},
         onreadystatechange: function() {},
-        url: "./",
+        url: './',
+        props: []
     },
+    DEFAULT_PROPS: [
+        'onload',
+        'onerror',
+        'onreadystatechange'
+    ],
     request: function(options) {
         // Get options and initialize request with URL
         var options = this.options(options);
         var req = new XMLHttpRequest();
-        req.onload = options.onload;
+
+        // Copy properties
+        for (var i = 0; i < options.props.length; i++) {
+            var key = options.props[i];
+            req[key] = options[key];
+        }
+
         req.open(options.method, options.url, options.async);
 
         // Request headers
@@ -30,17 +42,19 @@ var http = {
     },
     options: function(options) {
         var merged = {}, defaults = this.DEFAULTS;
-        for (var key in defaults) {
-            if (defaults.hasOwnProperty(key))
-                merged[key] = options[key] || defaults[key];
+        var keys = Object.keys(options).concat(Object.keys(defaults));
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            merged[key] = options[key] || defaults[key];
         }
+        merged.props = merged.props.concat(this.DEFAULT_PROPS);
         return merged;
     },
     get: function(options) {
         return this.request(options);
     },
     post: function(options) {
-        options.method = "POST";
+        options.method = 'POST';
         return this.request(options);
     }
 }
