@@ -63,8 +63,9 @@ A request with a custom timeout:
 http.get({
     url: '/api/poll',
     contentType: 'application/json',
-    onload: function() { console.log(JSON.parse(this.responseText)) }
+    onload: function() { console.log(JSON.parse(this.responseText)) },
     timeout: 3,
-    props: ['timeout']
+    ontimeout: function() { console.log('Poll request timed out!') },
+    props: ['timeout', 'ontimeout']
 });
 ```
