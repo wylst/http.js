@@ -1,3 +1,6 @@
+> `http.js` is now deprecated since the introduction and adoption of the [Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API), which is available in [most modern browsers](http://caniuse.com/#feat=fetch).  
+> For use in older browsers, we recommend a polyfill, such as [GitHub's implementation](https://github.com/github/fetch).
+
 ## http.js
 
 Make AJAX/HTTP requests from client-side JavaScript.
